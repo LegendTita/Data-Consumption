@@ -1,0 +1,17 @@
+name: Extract Files
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Extract files
+        run: |
+          unzip upload.zip -d .
