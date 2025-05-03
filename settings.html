@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ar-eg" dir="rtl">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d6efd">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="assets/img/ic_launcher.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Importing Cairo Font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <!-- Application Styling-->
+    <link rel="stylesheet" href="assets/css/app.css">
+      <!-- Application JS-->
+    <script async src="assets/js/app.js"></script>
+    
+    <!-- Toastr-->
+   <script src="https://cdn.jsdelivr.net/npm/vanillatoasts@1.6.0/vanillatoasts.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/vanillatoasts@1.6.0/vanillatoasts.min.css" rel="stylesheet">
+    <!-- ChartJs -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+    <title>الإعدادات</title>
+  </head>
+  <body>
+<!-- Header and navbar-->
+<header>
+<nav class="navbar bg-primary fixed-top rounded-bottom-2 shadow-sm p-2 mb-2">
+ 
+    <a class="navbar-brand text-light" href="#">
+      <i width="30" height="24" class="bi bi-pie-chart-fill d-inline-block align-text-top"></i>
+      استهلاك البيانات
+    </a>
+    <a href="#" class="text-end text-white" 
+    data-bs-toggle="collapse" data-bs-target="#collapseNavbar" aria-expanded="false" aria-controls="collapseNavbar">
+      <b><i class="bi bi-list display-6"></i></b>
+  </a>
+  
+<ul class="nav nav-pills nav-fill gap-2 p-2  small  w-100 rounded-5 collapse" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);" id="collapseNavbar">
+   <li class="nav-item" role="presentation">
+    <button onClick="window.location.replace('index.html')" class="nav-link rounded-5" data-bs-toggle="tab" type="button" role="tab" ><i class="bi bi-bar-chart-fill"></i> الجلسات</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button onClick="window.location.replace('report.html')" class="nav-link rounded-5"  data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="bi bi-clipboard-data-fill"></i> اداة التقرير</button>
+  </li>
+  
+ <li class="nav-item" role="presentation">
+    <button class="nav-link active rounded-5" data-bs-toggle="tab"  type="button" role="tab" ><i class="bi bi-gear-fill"></i> الإعدادات</button>
+  </li>
+  
+ <li class="nav-item" role="presentation">
+    <button class="nav-link rounded-5" data-bs-toggle="tab" type="button" role="tab" onClick="window.location.replace('lock.html')"><i class="bi bi-lock-fill"></i> قفل</button>
+  </li>
+</ul>
+</nav>
+</header>
+<main class="mt-5 pt-4">
+  <article>
+  <!-- Users Settings -->  
+ <section class="container my-2">
+<div class="card shadow-sm">
+  <h5 class="card-header bg-primary-subtle"><i class="bi bi-people-fill"></i> إعدادات المستخدمين</h5>
+  <div class="card-body">
+    <h5 class="card-title"><i class="bi bi-person-lines-fill"></i> قائمة المستخدمين </h5>
+    <div class="container text-center">
+      <button class="btn btn-primary my-3 animated-pulse-infinite" data-bs-target="#addUserModal" data-bs-toggle="modal" ><i class="bi bi-person-plus"></i> إضافة مستخدم</button>
+    </div>
+    
+   <div class="table-responsive w-100">
+   <table  style="font-weight:bolder" class="table table-sm table-bordered table-secondary rounded-2 shadow-sm table-hover user-select-none text-center ">
+     <thead>
+       <tr>
+        <th><i class="bi bi-person-fill"></i> المستخدم</th>
+        <th><i class="bi bi-gear-fill"></i></th>
+       </tr>
+     </thead>
+     <tbody id="usersListTblBody" >
+       <tr><td colspan="2" id="usersListPlaceholder"><i class="bi bi-file-earmark-minus"></i> لا توجد بيانات!</td></tr>
+     </tbody>
+   </table>
+   </div>
+    
+    
+    
+  </div>
+</div>
+
+ </section>
+ 
+<!-- Passcode Settings -->
+ <section class="container my-2">
+<div class="card shadow-sm">
+  <h5 class="card-header bg-primary-subtle"><i class="bi bi-key-fill"></i> إعدادات رمز القفل</h5>
+  <div class="card-body">
+         <form>
+            <div class="form-group my-2">
+              <label for="oldPasscode"><i class="bi bi-lock-fill"></i> رمز المرور القديم</label>
+              <input type="password" id="oldPasscode" minlength="6" maxlength="6" class="form-control" placeholder="أدخل رمز الرور القديم" required>
+            </div>
+            <div class="form-group my-2">
+              <label for="newPasscode"><i class="bi bi-lock"></i> رمز المرور الجديد</label>
+              <input type="password" minlength="6" maxlength="6" id="newPasscode" class="form-control" placeholder="أدخل رمز المرور الجديد" required>
+            </div>
+            <div class="form-group my-2">
+              <label for="confirmPasscode"><i class="bi bi-check-circle-fill"></i> تأكيد رمز المرور الجديد</label>
+              <input type="password" minlength="6" maxlength="6" id="confirmPasscode" class="form-control" placeholder="تأكيد رمز المرور الجديد" required>
+            </div>
+            <button type="submit" class="btn btn-primary my-2" id="changePasscodeBtn"><i class="bi bi-check-circle"></i> تغيير رمز المرور</button>
+          </form>
+  </div>
+
+ </section>
+
+ </article>
+</main>
+<!-- Delete Session Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteUserModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-light bg-danger ">
+        <h1 class="modal-title fs-5"><i class="bi bi-exclamation-triangle"></i> تنبيه هام</h1>
+      </div>
+      <div class="modal-body display-4">
+<i class="bi bi-info-circle"></i>
+هل انت متأكد من حذف المستخدم!
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+         <button type="button" class="btn btn-primary"  data-bs-dismiss="modal"><i class="bi bi-arrow-90deg-right"></i> تراجع</button>
+         
+        <button data-user="" type="button" onClick="deleteUser();" id="confirmDelBtn" data-bs-dismiss="modal" class="btn btn-danger"><i class="bi bi-check-lg"></i> تأكيد</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+   <!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-between bg-primary text-light">
+        <h1 class="modal-title fs-5"><i class="bi bi-plus-lg"></i> اضافة مستخدم</h1>
+        <a href="#" class="text-light float-left" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg display-6"></i></a>
+      </div>
+      <div class="modal-body">
+<div class="mb-3">
+  <label class="form-label"><i class="bi bi-person-bounding-box"></i> اسم المستخدم</label>
+<input type="text" id="usernameInput" class="form-control" />
+</div>
+
+ <div class="modal-footer flex-row-reverse">
+  <button data-bs-dismiss="modal"onclick="addUser()" type="button" id="addSessionBtn" class="btn btn-primary"><i class="bi bi-plus-lg"></i> اضافة</button>
+</button>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Delete Session Confirmation Modal 
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-light bg-danger ">
+        <h1 class="modal-title fs-5"><i class="bi bi-exclamation-triangle"></i> تنبيه هام</h1>
+      </div>
+      <div class="modal-body display-4">
+<i class="bi bi-info-circle"></i>
+هل انت متأكد من حذف الجلسة
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+         <button type="button" class="btn btn-primary"  data-bs-target="#editSessionModal" data-bs-toggle="modal"><i class="bi bi-arrow-90deg-right"></i> تراجع</button>
+         
+        <button type="button" onClick="deleteSession();" class="btn btn-danger"><i class="bi bi-check-lg"></i> تأكيد</button>
+        
+      </div>
+    </div>
+  </div>
+</div>-->
+
+    <!-- Bootstrap Bundle( with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   <!-- settings Page Scripts-->
+   <script src="assets/js/settings.js"></script>
+
+  </body>
+</html>
